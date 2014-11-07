@@ -4,7 +4,13 @@ Flats
 Приложение построено на основе шаблона [yii2 advanced](http://www.yiiframework.com/doc-2.0/guide-tutorial-advanced-app.html)
 
 
-GETTING STARTED
+Требования
+------------
+
+Минимальное требование по этому шаблону приложения, поддержка PHP 5.4.0.
+
+
+Установка
 ---------------
 
 Шаги по установке приложения
@@ -50,33 +56,3 @@ frontend
 vendor/					содержит сторонние пакеты необходимые для работы проекта
 environments/			содержит шаблоны вариантов среды развертывания (используестя при запуске init)
 ```
-
-
-Требования
-------------
-
-Минимальное требование по этому шаблону приложения, поддержка PHP 5.4.0.
-
-
-INSTALLATION
-------------
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `advanced` that is directly under the Web root.
-
-Then follow the instructions given in "GETTING STARTED".
-
-
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install the application using the following command:
-
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta2"
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-advanced advanced
-~~~
