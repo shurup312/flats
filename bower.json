@@ -1,0 +1,23 @@
+{
+  "name": "flats",
+  "version": "0.0.0",
+  "homepage": "https://github.com/shurup312/flats",
+  "authors": [
+    "maxyengine <maxyengine@gmail.com>"
+  ],
+  "dependencies":{
+	"angular": "*",
+	"angular-ui-router": "*"
+  },
+  "description": "project",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower",
+    "test",
+    "tests"
+  ]
+}
