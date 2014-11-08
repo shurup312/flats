@@ -16,6 +16,8 @@ class m141107_093310_create_metro_table extends Migration
 			'id' => Schema::TYPE_PK,
 			'name' => Schema::TYPE_STRING . '(64) NOT NULL',
 		], $tableOptions);
+
+		$this->addForeignKey('FK_flats_metro', '{{%flats}}', 'metro_id', '{{%metro}}', 'id');
 	}
 
 	public function down()

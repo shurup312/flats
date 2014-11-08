@@ -5,21 +5,23 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "metro".
+ * This is the model class for table "streets".
  *
  * @property integer $id
+ * @property integer $city_id
  * @property string $name
  *
  * @property Flats[] $flats
+ * @property Cities $city
  */
-class Metro extends \yii\db\ActiveRecord
+class Street extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'metro';
+        return 'streets';
     }
 
     /**
@@ -28,8 +30,9 @@ class Metro extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 64]
+            [['city_id', 'name'], 'required'],
+            [['city_id'], 'integer'],
+            [['name'], 'string', 'max' => 255]
         ];
     }
 
@@ -40,6 +43,7 @@ class Metro extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'city_id' => 'City ID',
             'name' => 'Name',
         ];
     }
@@ -49,6 +53,14 @@ class Metro extends \yii\db\ActiveRecord
      */
     public function getFlats()
     {
-        return $this->hasMany(Flats::className(), ['metro_id' => 'id']);
+        return $this->hasMany(Flats::className(), ['street_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCity()
+    {
+        return $this->hasOne(Cities::className(), ['id' => 'city_id']);
     }
 }

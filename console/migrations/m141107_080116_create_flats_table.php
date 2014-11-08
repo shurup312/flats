@@ -15,6 +15,9 @@ class m141107_080116_create_flats_table extends Migration
 		$this->createTable('{{%flats}}', [
 			'id' => Schema::TYPE_PK,
 			'user_id' => Schema::TYPE_INTEGER . ' NOT NULL',
+			'owner_id' => Schema::TYPE_INTEGER . ' NOT NULL',
+			'metro_id' => Schema::TYPE_INTEGER . ' NOT NULL',
+			'street_id' => Schema::TYPE_INTEGER . ' NOT NULL',
 			'type_id' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT "0" COMMENT "0 - к квартире"',
 			'comment' => Schema::TYPE_TEXT . ' NOT NULL',
 			'user_agent' => Schema::TYPE_STRING . ' NOT NULL',

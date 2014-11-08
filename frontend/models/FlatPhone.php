@@ -5,22 +5,22 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "flat_metro".
+ * This is the model class for table "flats_phones".
  *
  * @property integer $flat_id
- * @property integer $metro_id
+ * @property integer $phone_id
  *
- * @property Metro $metro
+ * @property Phones $phone
  * @property Flats $flat
  */
-class FlatMetro extends \yii\db\ActiveRecord
+class FlatPhone extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'flat_metro';
+        return 'flats_phones';
     }
 
     /**
@@ -29,8 +29,8 @@ class FlatMetro extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['flat_id', 'metro_id'], 'required'],
-            [['flat_id', 'metro_id'], 'integer']
+            [['flat_id', 'phone_id'], 'required'],
+            [['flat_id', 'phone_id'], 'integer']
         ];
     }
 
@@ -41,16 +41,16 @@ class FlatMetro extends \yii\db\ActiveRecord
     {
         return [
             'flat_id' => 'Flat ID',
-            'metro_id' => 'Metro ID',
+            'phone_id' => 'Phone ID',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMetro()
+    public function getPhone()
     {
-        return $this->hasOne(Metro::className(), ['id' => 'metro_id']);
+        return $this->hasOne(Phones::className(), ['id' => 'phone_id']);
     }
 
     /**

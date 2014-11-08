@@ -19,6 +19,7 @@ class m141107_114240_create_streets_table extends Migration
 		], $tableOptions);
 
 		$this->addForeignKey('FK_streets_cities', '{{%streets}}', 'city_id', '{{%cities}}', 'id');
+		$this->addForeignKey('FK_flats_streets', '{{%flats}}', 'street_id', '{{%streets}}', 'id');
 	}
 
 	public function down()

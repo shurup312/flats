@@ -22,6 +22,10 @@ controllers
 
 		$scope.$parent.navActive = 'create';
 
+		$scope.data = {
+			Flat: {}
+		};
+
 		$scope.submit = function (url) {
 			console.log($scope.data);
 			$http.post(url, $scope.data).success(function (response) {

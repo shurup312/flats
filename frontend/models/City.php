@@ -5,21 +5,21 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "metro".
+ * This is the model class for table "cities".
  *
  * @property integer $id
  * @property string $name
  *
- * @property Flats[] $flats
+ * @property Streets[] $streets
  */
-class Metro extends \yii\db\ActiveRecord
+class City extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'metro';
+        return 'cities';
     }
 
     /**
@@ -47,8 +47,8 @@ class Metro extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFlats()
+    public function getStreets()
     {
-        return $this->hasMany(Flats::className(), ['metro_id' => 'id']);
+        return $this->hasMany(Streets::className(), ['city_id' => 'id']);
     }
 }

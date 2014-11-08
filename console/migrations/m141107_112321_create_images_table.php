@@ -14,8 +14,6 @@ class m141107_112321_create_images_table extends Migration
 
 		$this->createTable('{{%images}}', [
 			'id' => Schema::TYPE_PK,
-			'parent_id' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT "0"',
-			'type_id' => Schema::TYPE_SMALLINT . '  NOT NULL DEFAULT "0" COMMENT "1 - квартиры, 2 - пользователи, 3 - собственники"',
 			'path' => Schema::TYPE_STRING . '(128) NOT NULL',
 		], $tableOptions);
 	}

@@ -9,6 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property integer $user_id
+ * @property integer $owner_id
+ * @property integer $metro_id
+ * @property integer $street_id
  * @property integer $type_id
  * @property string $comment
  * @property string $user_agent
@@ -44,11 +47,16 @@ use Yii;
  * @property integer $is_liquidity
  * @property string $description
  *
- * @property FlatMetro[] $flatMetros
- * @property Metro[] $metros
+ * @property Streets $street
+ * @property Metro $metro
+ * @property Owners $owner
  * @property Users $user
+ * @property FlatsImages[] $flatsImages
+ * @property Images[] $images
+ * @property FlatsPhones[] $flatsPhones
+ * @property Phones[] $phones
  */
-class Flats extends \yii\db\ActiveRecord
+class Flat extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -64,13 +72,13 @@ class Flats extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'user_agent', 'area_total', 'area_live', 'area_kitchen',/*'comment', 'description'*/], 'required'],
-            [['user_id', 'type_id', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
-            //[['comment', 'description'], 'string'],
-            //[['date_created', 'date_updated'], 'safe'],
-            [['area_total', 'area_live', 'area_kitchen', /*'cost', 'cost_market'*/], 'number'],
+            [['user_id', 'owner_id', 'metro_id', 'street_id', 'comment', 'user_agent', 'description'], 'required'],
+            [['user_id', 'owner_id', 'metro_id', 'street_id', 'type_id', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
+            [['comment', 'description'], 'string'],
+            [['date_created', 'date_updated'], 'safe'],
+            [['area_total', 'area_live', 'area_kitchen', 'cost', 'cost_market'], 'number'],
             [['user_agent'], 'string', 'max' => 255],
-            //[['ip'], 'string', 'max' => 16]
+            [['ip'], 'string', 'max' => 16]
         ];
     }
 
@@ -82,6 +90,9 @@ class Flats extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
+            'owner_id' => 'Owner ID',
+            'metro_id' => 'Metro ID',
+            'street_id' => 'Street ID',
             'type_id' => 'Type ID',
             'comment' => 'Comment',
             'user_agent' => 'User Agent',
@@ -119,33 +130,28 @@ class Flats extends \yii\db\ActiveRecord
         ];
     }
 
-	public function labels()
-	{
-		$result = [];
-		foreach ($this->attributeLabels() as $name => $label) {
-			$result[] = [
-				'name' => $name,
-				'label' => $label
-			];
-		}
-
-		return $result;
-	}
-
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFlatMetros()
+    public function getStreet()
     {
-        return $this->hasMany(FlatMetro::className(), ['flat_id' => 'id']);
+        return $this->hasOne(Streets::className(), ['id' => 'street_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMetros()
+    public function getMetro()
     {
-        return $this->hasMany(Metro::className(), ['id' => 'metro_id'])->viaTable('flat_metro', ['flat_id' => 'id']);
+        return $this->hasOne(Metro::className(), ['id' => 'metro_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOwner()
+    {
+        return $this->hasOne(Owners::className(), ['id' => 'owner_id']);
     }
 
     /**
@@ -154,5 +160,37 @@ class Flats extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(Users::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFlatsImages()
+    {
+        return $this->hasMany(FlatsImages::className(), ['flat_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Images::className(), ['id' => 'image_id'])->viaTable('flats_images', ['flat_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFlatsPhones()
+    {
+        return $this->hasMany(FlatsPhones::className(), ['flat_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPhones()
+    {
+        return $this->hasMany(Phones::className(), ['id' => 'phone_id'])->viaTable('flats_phones', ['flat_id' => 'id']);
     }
 }

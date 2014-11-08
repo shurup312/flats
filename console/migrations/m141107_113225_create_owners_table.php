@@ -19,6 +19,8 @@ class m141107_113225_create_owners_table extends Migration
 			'last_name' => Schema::TYPE_STRING . '(64) NOT NULL DEFAULT "0" COMMENT "Фамилия"',
 			'age' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT "0"',
 		], $tableOptions);
+
+		$this->addForeignKey('FK_flats_owners', '{{%flats}}', 'owner_id', '{{%owners}}', 'id');
 	}
 
 	public function down()
