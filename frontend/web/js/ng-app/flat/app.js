@@ -19,5 +19,11 @@ var app = angular.module('app', ['ui.router', 'app.controllers', 'app.services']
 				url: '/',
 				templateUrl: '/backend/flat/list',
 				controller: 'FlatListController'
-			});
+			})
+			.state('create', {
+				url: '/create',
+				templateUrl: '/backend/flat/create',
+				controller: 'FlatCreateController'
+			})
+		;
 	}]);

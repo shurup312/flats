@@ -50,14 +50,8 @@ use frontend\widgets\Alert;
 	]);
 	NavBar::end();
 	?>
-
-	<div class="container">
-		<?= Breadcrumbs::widget([
-			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-		]) ?>
-		<?= Alert::widget() ?>
-		<?= $content ?>
-	</div>
+	<br><br><br><br>
+	<?= $content ?>
 </div>
 
 <footer class="footer">
@@ -68,6 +62,7 @@ use frontend\widgets\Alert;
 </footer>
 
 <?php $this->endBody() ?>
+
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -64,13 +64,13 @@ class Flats extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'comment', 'user_agent', 'description'], 'required'],
+            [['user_id', 'user_agent', 'area_total', 'area_live', 'area_kitchen',/*'comment', 'description'*/], 'required'],
             [['user_id', 'type_id', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
-            [['comment', 'description'], 'string'],
-            [['date_created', 'date_updated'], 'safe'],
-            [['area_total', 'area_live', 'area_kitchen', 'cost', 'cost_market'], 'number'],
+            //[['comment', 'description'], 'string'],
+            //[['date_created', 'date_updated'], 'safe'],
+            [['area_total', 'area_live', 'area_kitchen', /*'cost', 'cost_market'*/], 'number'],
             [['user_agent'], 'string', 'max' => 255],
-            [['ip'], 'string', 'max' => 16]
+            //[['ip'], 'string', 'max' => 16]
         ];
     }
 
@@ -118,6 +118,19 @@ class Flats extends \yii\db\ActiveRecord
             'description' => 'Description',
         ];
     }
+
+	public function labels()
+	{
+		$result = [];
+		foreach ($this->attributeLabels() as $name => $label) {
+			$result[] = [
+				'name' => $name,
+				'label' => $label
+			];
+		}
+
+		return $result;
+	}
 
     /**
      * @return \yii\db\ActiveQuery
