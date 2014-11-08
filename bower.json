@@ -7,7 +7,8 @@
   ],
   "dependencies":{
 	"angular": "*",
-	"angular-ui-router": "*"
+	"angular-ui-router": "*",
+	"angular-i18n": "*"
   },
   "description": "project",
   "license": "MIT",

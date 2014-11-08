@@ -13,6 +13,11 @@ class BackendController extends Controller
 	/**
 	 * @inheritdoc
 	 */
+	public $layout = 'backend';
+
+	/**
+	 * @inheritdoc
+	 */
 	public function behaviors()
 	{
 		return [
