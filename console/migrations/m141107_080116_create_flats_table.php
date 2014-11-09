@@ -24,7 +24,7 @@ class m141107_080116_create_flats_table extends Migration
 			'comment' => Schema::TYPE_TEXT . ' NOT NULL',
 			'user_agent' => Schema::TYPE_STRING . ' NOT NULL',
 			'ip' => Schema::TYPE_STRING . '(16) DEFAULT NULL',
-			'date_created' => Schema::TYPE_TIMESTAMP . ' NOT NULL DEFAULT CURRENT_TIMESTAMP',
+			'date_created' => Schema::TYPE_TIMESTAMP . ' NULL DEFAULT NULL',
 			'date_updated' => Schema::TYPE_TIMESTAMP . ' NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
 			'rooms_total' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT "0" COMMENT "0 - комната, 1 и далее - количество комнат в квартире"',
 			'rooms_offer' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT "0"',
