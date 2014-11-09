@@ -3,80 +3,92 @@
 namespace frontend\models;
 
 use common\models\ActiveRecord;
+use common\models\User;
 use Yii;
 
 /**
  * This is the model class for table "flats".
  *
- * @property integer $id
- * @property integer $user_id
- * @property integer $owner_id
- * @property integer $metro_id
- * @property integer $street_id
- * @property string $num_house
- * @property integer $num_flat
- * @property integer $type_id
- * @property string $comment
- * @property string $user_agent
- * @property string $ip
- * @property string $date_created
- * @property string $date_updated
- * @property integer $rooms_total
- * @property integer $rooms_offer
- * @property integer $rooms_type
- * @property integer $is_called
- * @property integer $far_minutes
- * @property integer $far_type
- * @property integer $type
- * @property double $area_total
- * @property double $area_live
- * @property double $area_kitchen
- * @property double $cost
- * @property double $cost_market
- * @property integer $currency_id
- * @property integer $is_insurance
- * @property integer $floor_num
- * @property integer $floor_total
- * @property integer $is_furnitured_rooms
- * @property integer $is_furnitures_kitchen
- * @property integer $is_tv
- * @property integer $is_refrigerator
- * @property integer $is_washer
- * @property integer $is_phone
- * @property integer $is_balcony
- * @property integer $is_animal
- * @property integer $is_child
- * @property integer $is_on_main
- * @property integer $is_liquidity
- * @property string $description
+ * @property integer             $id
+ * @property integer             $user_id
+ * @property integer             $owner_id
+ * @property integer             $metro_id
+ * @property integer             $street_id
+ * @property string              $num_house
+ * @property integer             $num_flat
+ * @property integer             $type_offer
+ * @property string              $comment
+ * @property string              $user_agent
+ * @property string              $ip
+ * @property string              $date_created
+ * @property string              $date_updated
+ * @property integer             $rooms_total
+ * @property integer             $rooms_offer
+ * @property integer             $rooms_type
+ * @property integer             $is_called
+ * @property integer             $far_minutes
+ * @property integer             $far_type
+ * @property integer             $type_property
+ * @property double              $area_total
+ * @property double              $area_live
+ * @property double              $area_kitchen
+ * @property double              $cost
+ * @property double              $cost_market
+ * @property integer             $currency_id
+ * @property integer             $is_insurance
+ * @property integer             $floor_num
+ * @property integer             $floor_total
+ * @property integer             $is_furnitured_rooms
+ * @property integer             $is_furnitures_kitchen
+ * @property integer             $is_tv
+ * @property integer             $is_refrigerator
+ * @property integer             $is_washer
+ * @property integer             $is_phone
+ * @property integer             $is_balcony
+ * @property integer             $is_animal
+ * @property integer             $is_child
+ * @property integer             $is_on_main
+ * @property integer             $is_liquidity
+ * @property string              $description
  *
- * @property Streets $street
- * @property Metro $metro
- * @property Owners $owner
- * @property Users $user
- * @property FlatsImages[] $flatsImages
- * @property Images[] $images
- * @property FlatsPhones[] $flatsPhones
- * @property Phones[] $phones
+ * @property Street              $street
+ * @property Metro               $metro
+ * @property Owner               $owner
+ * @property \common\models\User $user
+ * @property FlatImage[]         $flatsImages
+ * @property Image[]             $images
+ * @property FlatPhone[]         $flatsPhones
+ * @property Phone[]             $phones
  */
-class Flat extends ActiveRecord
-{
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'flats';
-    }
+class Flat extends ActiveRecord {
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
+	const TYPE_OFFER_RENT     = 0;
+	const TYPE_OFFER_SALE     = 1;
+	const ROOM_TYPE_ADJOINING = 0; // тип комнат - смежные комнаты
+	const ROOM_TYPE_SEPARATE  = 0; // тип-комнат - раздельные комнаты
+	const FAR_TYPE_WALK       = 0; // тип удаленности - пешком
+	const FAR_TYPE_ON_CAR     = 0; // тип удаленности - на машине
+	const TYPE_PROPERTY_FLAT  = 0;
+	const TYPE_PROPERTY_HOUSE = 1;
+	const CURRENCY_RUR        = 0;
+	const CURRENCY_USD        = 1;
+	const CURRENCY_EUR        = 2;
+
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName () {
+		return 'flats';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
     {
         return [
             [['user_id', 'street_id', 'num_house', 'num_flat', 'user_agent'], 'required'],
-            [['user_id', 'owner_id', 'metro_id', 'street_id', 'num_flat', 'type_id', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
+            [['user_id', 'owner_id', 'metro_id', 'street_id', 'num_flat', 'type_offer', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
             [['comment', 'description'], 'string'],
             [['date_created', 'date_updated'], 'safe'],
             [['area_total', 'area_live', 'area_kitchen', 'cost', 'cost_market'], 'number'],
@@ -91,112 +103,104 @@ class Flat extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'owner_id' => 'Owner ID',
-            'metro_id' => 'Metro ID',
-            'street_id' => 'Street ID',
-            'num_house' => 'Num House',
-            'num_flat' => 'Num Flat',
-            'type_id' => 'Type ID',
-            'comment' => 'Comment',
-            'user_agent' => 'User Agent',
-            'ip' => 'Ip',
-            'date_created' => 'Date Created',
-            'date_updated' => 'Date Updated',
-            'rooms_total' => 'Rooms Total',
-            'rooms_offer' => 'Rooms Offer',
-            'rooms_type' => 'Rooms Type',
-            'is_called' => 'Is Called',
-            'far_minutes' => 'Far Minutes',
-            'far_type' => 'Far Type',
-            'type' => 'Type',
-            'area_total' => 'Area Total',
-            'area_live' => 'Area Live',
-            'area_kitchen' => 'Area Kitchen',
-            'cost' => 'Cost',
-            'cost_market' => 'Cost Market',
-            'currency_id' => 'Currency ID',
-            'is_insurance' => 'Is Insurance',
-            'floor_num' => 'Floor Num',
-            'floor_total' => 'Floor Total',
-            'is_furnitured_rooms' => 'Is Furnitured Rooms',
-            'is_furnitures_kitchen' => 'Is Furnitures Kitchen',
-            'is_tv' => 'Is Tv',
-            'is_refrigerator' => 'Is Refrigerator',
-            'is_washer' => 'Is Washer',
-            'is_phone' => 'Is Phone',
-            'is_balcony' => 'Is Balcony',
-            'is_animal' => 'Is Animal',
-            'is_child' => 'Is Child',
-            'is_on_main' => 'Is On Main',
-            'is_liquidity' => 'Is Liquidity',
-            'description' => 'Description',
-        ];
+		return [
+			'id'                    => 'ID',
+			'user_id'               => 'ID пользователя',
+			'owner_id'              => 'ID родителя',
+			'metro_id'              => 'ID метро',
+			'street_id'             => 'ID улицы',
+			'num_house'             => 'Номер дома',
+			'num_flat'              => 'Номер квартиры',
+			'type_offer'            => 'Type ID',
+			'comment'               => 'Комментарий',
+			'user_agent'            => 'Юзер-агент',
+			'ip'                    => 'IP',
+			'date_created'          => 'Дата создания',
+			'date_updated'          => 'Дата обновления',
+			'rooms_total'           => 'Всего комнат',
+			'rooms_offer'           => 'Предлагается комнат',
+			'rooms_type'            => 'Тип комтан',
+			'is_called'             => 'Дозвонились',
+			'far_minutes'           => 'Удаленность от метро в минутах',
+			'far_type'              => 'Тип удаленности',
+			'type'                  => 'Тип недвижимости',
+			'area_total'            => 'Площадь всего',
+			'area_live'             => 'Жилая площадь',
+			'area_kitchen'          => 'Площадь кухни',
+			'cost'                  => 'Стоимость',
+			'cost_market'           => 'Рыночная стоимость',
+			'currency_id'           => 'Валюта',
+			'is_insurance'          => 'Страховой взнос',
+			'floor_num'             => 'Этаж',
+			'floor_total'           => 'Этажей всего',
+			'is_furnitured_rooms'   => 'Мебелированные комнаты',
+			'is_furnitures_kitchen' => 'Мебелированная кухня',
+			'is_tv'                 => 'ТВ',
+			'is_refrigerator'       => 'Холодильник',
+			'is_washer'             => 'Стиральная машина',
+			'is_phone'              => 'Телефон',
+			'is_balcony'            => 'Балкон',
+			'is_animal'             => 'С животными',
+			'is_child'              => 'С детьми',
+			'is_on_main'            => 'Показывать на главной',
+			'is_liquidity'          => 'Ликвидная',
+			'description'           => 'Описание',
+		];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getStreet()
-    {
-        return $this->hasOne(Streets::className(), ['id' => 'street_id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getStreet () {
+		return $this->hasOne(Street::className(), ['id' => 'street_id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMetro()
-    {
-        return $this->hasOne(Metro::className(), ['id' => 'metro_id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getMetro () {
+		return $this->hasOne(Metro::className(), ['id' => 'metro_id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOwner()
-    {
-        return $this->hasOne(Owners::className(), ['id' => 'owner_id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getOwner () {
+		return $this->hasOne(Owner::className(), ['id' => 'owner_id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(Users::className(), ['id' => 'user_id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getUser () {
+		return $this->hasOne(User::className(), ['id' => 'user_id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFlatsImages()
-    {
-        return $this->hasMany(FlatsImages::className(), ['flat_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getFlatsImages () {
+		return $this->hasMany(FlatImage::className(), ['flat_id' => 'id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImages()
-    {
-        return $this->hasMany(Images::className(), ['id' => 'image_id'])->viaTable('flats_images', ['flat_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getImages () {
+		return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable('flats_images', ['flat_id' => 'id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFlatsPhones()
-    {
-        return $this->hasMany(FlatsPhones::className(), ['flat_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getFlatsPhones () {
+		return $this->hasMany(FlatPhone::className(), ['flat_id' => 'id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPhones()
-    {
-        return $this->hasMany(Phones::className(), ['id' => 'phone_id'])->viaTable('flats_phones', ['flat_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getPhones () {
+		return $this->hasMany(Phone::className(), ['id' => 'phone_id'])->viaTable('flats_phones', ['flat_id' => 'id']);
+	}
 }

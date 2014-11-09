@@ -19,7 +19,7 @@ class m141107_073702_create_comments_table extends Migration
 			'comment' => Schema::TYPE_TEXT . ' NOT NULL',
 			'user_agent' => Schema::TYPE_STRING . ' NOT NULL',
 			'ip' => Schema::TYPE_STRING . '(16) DEFAULT NULL',
-			'date_created' => Schema::TYPE_TIMESTAMP . ' NOT NULL DEFAULT CURRENT_TIMESTAMP',
+			'date_created' => Schema::TYPE_TIMESTAMP . ' NULL DEFAULT NULL',
 			'date_updated' => Schema::TYPE_TIMESTAMP . ' NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
 		], $tableOptions);
 
