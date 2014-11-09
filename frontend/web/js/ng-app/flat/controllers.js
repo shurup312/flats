@@ -11,13 +11,25 @@ controllers
 		$scope.orderProp = 'id';
 		$scope.setOrderBy = function(field) {
 			$scope.orderProp = field;
-		}
+		};
 
 		Flat.getList()
 			.success(function (response) {
-				$scope.data = response.data;
-				$scope.fields = response.fields;
+				$scope.allFlatsInformation = response.allFlatsInformation;
+				$scope.fieldsLabel = response.fieldsLabel;
 			});
+        /**
+         * TODO: заготовка для вертикализации текста.
+         */
+        $scope.model = {
+            textSize: 15,
+            isVerticalText : function(text) {
+                if(text.length > $scope.model.textSize) {
+                    return 'verticalText';
+                }
+                return '';
+            }
+        }
 	}])
 	.controller('FlatCreateController', ['$scope', '$state', '$stateParams', 'Flat', 'City', 'Street', 'Metro', function ($scope, $state, $stateParams, Flat, City, Street, Metro) {
 

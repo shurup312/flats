@@ -64,15 +64,37 @@ class Flat extends ActiveRecord {
 
 	const TYPE_OFFER_RENT     = 0;
 	const TYPE_OFFER_SALE     = 1;
-	const ROOM_TYPE_ADJOINING = 0; // тип комнат - смежные комнаты
-	const ROOM_TYPE_SEPARATE  = 0; // тип-комнат - раздельные комнаты
-	const FAR_TYPE_WALK       = 0; // тип удаленности - пешком
-	const FAR_TYPE_ON_CAR     = 0; // тип удаленности - на машине
+	const ROOM_TYPE_ADJOINING = 0;
+	const ROOM_TYPE_SEPARATE  = 1;
+	const FAR_TYPE_WALK       = 1;
+	const FAR_TYPE_ON_CAR     = 2;
 	const TYPE_PROPERTY_FLAT  = 0;
 	const TYPE_PROPERTY_HOUSE = 1;
 	const CURRENCY_RUR        = 0;
 	const CURRENCY_USD        = 1;
 	const CURRENCY_EUR        = 2;
+
+	public static $typeOffer = [
+		self::TYPE_OFFER_RENT => 'Аренда',
+		self::TYPE_OFFER_SALE => 'Продажа',
+	];
+	public static $roomType = [
+		self::ROOM_TYPE_ADJOINING => 'Смежные',
+		self::ROOM_TYPE_SEPARATE => 'Раздельные',
+	];
+	public static $farType = [
+		self::FAR_TYPE_ON_CAR => 'Пешком',
+		self::FAR_TYPE_WALK => 'На транспорте',
+	];
+	public static $typeProperty = [
+		self::TYPE_PROPERTY_FLAT => 'Квартира',
+		self::TYPE_PROPERTY_HOUSE => 'Дом',
+	];
+	public static $currency = [
+		self::CURRENCY_EUR => 'евро',
+		self::CURRENCY_RUR => 'руб',
+		self::CURRENCY_USD => '$',
+	];
 
 	/**
 	 * @inheritdoc
@@ -111,19 +133,17 @@ class Flat extends ActiveRecord {
 			'street_id'             => 'ID улицы',
 			'num_house'             => 'Номер дома',
 			'num_flat'              => 'Номер квартиры',
-			'type_offer'            => 'Type ID',
+			'type_offer'            => 'Тип предолжения',
 			'comment'               => 'Комментарий',
-			'user_agent'            => 'Юзер-агент',
-			'ip'                    => 'IP',
 			'date_created'          => 'Дата создания',
 			'date_updated'          => 'Дата обновления',
 			'rooms_total'           => 'Всего комнат',
 			'rooms_offer'           => 'Предлагается комнат',
-			'rooms_type'            => 'Тип комтан',
+			'rooms_type'            => 'Тип комнат',
 			'is_called'             => 'Дозвонились',
 			'far_minutes'           => 'Удаленность от метро в минутах',
 			'far_type'              => 'Тип удаленности',
-			'type'                  => 'Тип недвижимости',
+			'type_property'         => 'Тип недвижимости',
 			'area_total'            => 'Площадь всего',
 			'area_live'             => 'Жилая площадь',
 			'area_kitchen'          => 'Площадь кухни',

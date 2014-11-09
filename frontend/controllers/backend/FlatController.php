@@ -5,6 +5,7 @@ use frontend\models\Flat;
 use frontend\assets\FlatAsset;
 use common\controllers\BackendController;
 use frontend\models\Owner;
+use frontend\models\searchList\backend\flat\ListSearchList;
 use yii\web\Response;
 use Yii;
 
@@ -26,12 +27,10 @@ class FlatController extends BackendController
 			return $this->renderPartial($this->action->id);
 		}
 		Yii::$app->response->format = Response::FORMAT_JSON;
-		$model = new Flat();
-
-		return [
-			'data' => $model->find()->asArray()->all(),
-			'fields' => $model->labels()
-		];
+		$params = array();
+		$sl = new ListSearchList();
+		$sl->setParams($params);
+		return $sl->getResults();
 	}
 
 	public function actionCreate()
