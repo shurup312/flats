@@ -61,7 +61,7 @@ class ListSearchList extends AbstractSearchList {
 	 * @return Flat
 	 */
 	public function getFlatModel () {
-		if (!$this->models['flat']) {
+		if (!isset($this->models['flat'])) {
 			$this->models['flat'] = new Flat();
 		}
 		return $this->models['flat'];
@@ -71,7 +71,7 @@ class ListSearchList extends AbstractSearchList {
 	 * @return Owner
 	 */
 	public function getOwnerModel () {
-		if (!$this->models['owner']) {
+		if (!isset($this->models['owner'])) {
 			$this->models['owner'] = new Owner();
 		}
 		return $this->models['owner'];
@@ -91,7 +91,7 @@ class ListSearchList extends AbstractSearchList {
 	 * @return Metro
 	 */
 	public function getMetroModel () {
-		if (!$this->models['metro']) {
+		if (!isset($this->models['metro'])) {
 			$this->models['metro'] = new Metro();
 		}
 		return $this->models['metro'];
