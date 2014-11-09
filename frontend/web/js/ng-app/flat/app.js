@@ -1,17 +1,10 @@
-/**
- * App services module
- * */
+'use strict';
+
 var services = angular.module('app.services', []);
+var directives = angular.module('app.directives', []);
+var controllers = angular.module('app.controllers', ['app.services', , 'app.directives']);
 
-/**
- * App controllers module
- * */
-var controllers = angular.module('app.controllers', ['app.services']);
-
-/**
- * App module
- * */
-var app = angular.module('app', ['ui.router', 'app.controllers', 'app.services'])
+var app = angular.module('app', ['ui.router', 'app.controllers', 'app.services', 'app.directives'])
 	.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     	$urlRouterProvider.otherwise('/');
     	$stateProvider

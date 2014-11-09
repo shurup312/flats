@@ -13,16 +13,6 @@ $this->title = 'Добавление объекта';
 
 	<form id="company-form" role="form" data-ng-submit="create()" novalidate>
 
-		<!--Agent-->
-		<fieldset class="row">
-			<legend>Агент</legend>
-			<div class="form-group" data-ng-class="{'has-error' : errors.Flat.user_agent}">
-				<label>ФИО</label>
-				<input type="text" class="form-control" data-ng-model="data.Flat.user_agent">
-			</div>
-		</fieldset>
-		<!--/Agent-->
-
 		<!--Adress-->
 		<fieldset class="row">
 			<legend>Адрес</legend>
@@ -84,9 +74,9 @@ $this->title = 'Добавление объекта';
 		<!--Object-->
 		<fieldset class="row">
 			<legend>Объект</legend>
-			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.type}">
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.type_property}">
 				<label>Объект</label>
-				<select class="form-control" data-ng-model="data.Flat.type">
+				<select class="form-control" data-ng-model="data.Flat.type_property">
 					<option selected="true" value="">-</option>
 					<option value="1">Квартира</option>
 					<option value="2">Дом</option>
@@ -178,6 +168,16 @@ $this->title = 'Добавление объекта';
 			<br>
 		</fieldset>
 		<!--/Addons-->
+
+		<!--Images-->
+		<fieldset class="row">
+			<legend>Картинки</legend>
+			<div class="form-group">
+				<input multiple="multiple" id="fileSelector" type="file" onchange="angular.element(this).scope().fileChanged(this)" style="display:none">
+				<button onclick="$('#fileSelector').trigger('click')" type="button" class="btn btn-success">+ Добавить картинку</button>
+			</div>
+		</fieldset>
+		<!--/Images-->
 
 		<pre>data:{{data}}</pre>
 		<pre>errors:{{errors}}</pre>

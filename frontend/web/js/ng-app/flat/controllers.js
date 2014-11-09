@@ -23,6 +23,10 @@ controllers
 
 		$scope.$parent.navActive = 'create';
 
+		$scope.fileChanged = function(element) {
+			console.log(element);
+		}
+
 		City.getList()
 			.success(function (response) {
 				$scope.cities = response.data;

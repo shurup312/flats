@@ -18,8 +18,6 @@ use Yii;
  * @property integer             $num_flat
  * @property integer             $type_offer
  * @property string              $comment
- * @property string              $user_agent
- * @property string              $ip
  * @property string              $date_created
  * @property string              $date_updated
  * @property integer             $rooms_total
@@ -87,14 +85,12 @@ class Flat extends ActiveRecord {
 	public function rules()
     {
         return [
-            [['user_id', 'street_id', 'num_house', 'num_flat', 'user_agent'], 'required'],
-            [['user_id', 'owner_id', 'metro_id', 'street_id', 'num_flat', 'type_offer', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
+            [['user_id', 'street_id', 'num_house', 'num_flat'], 'required'],
+            [['user_id', 'owner_id', 'metro_id', 'street_id', 'num_flat', 'type_offer', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
             [['comment', 'description'], 'string'],
             [['date_created', 'date_updated'], 'safe'],
             [['area_total', 'area_live', 'area_kitchen', 'cost', 'cost_market'], 'number'],
             [['num_house'], 'string', 'max' => 20],
-            [['user_agent'], 'string', 'max' => 255],
-            [['ip'], 'string', 'max' => 16]
         ];
     }
 
@@ -113,8 +109,6 @@ class Flat extends ActiveRecord {
 			'num_flat'              => 'Номер квартиры',
 			'type_offer'            => 'Type ID',
 			'comment'               => 'Комментарий',
-			'user_agent'            => 'Юзер-агент',
-			'ip'                    => 'IP',
 			'date_created'          => 'Дата создания',
 			'date_updated'          => 'Дата обновления',
 			'rooms_total'           => 'Всего комнат',
