@@ -14,6 +14,7 @@ class FlatAsset extends AssetBundle
 	];
 	public $js = [
 		'js/ng-app/flat/app.js',
+		'js/ng-app/flat/services.js',
 		'js/ng-app/flat/controllers.js',
 	];
 	public $depends = [

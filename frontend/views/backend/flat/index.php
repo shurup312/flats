@@ -9,7 +9,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<ul class="nav nav-pills" role="tablist">
 		<li role="presentation" data-ng-class="{active: navActive == 'all'}" ui-sref="list">
-			<a href="#">Все</a>
+			<a href="#">Все объекты</a>
 		</li>
 		<li role="presentation" data-ng-class="{active: navActive == 'rent'}">
 			<a ui-sref="list">Аренда</a>

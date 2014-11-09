@@ -12,29 +12,117 @@ $this->title = 'Добавление объекта';
 	<h1><?= Html::encode($this->title) ?></h1>
 
 	<form id="company-form" role="form" data-ng-submit="submit('<?= Url::to('/backend/flat/create')?>')" novalidate>
-		<div class="form-group" data-ng-class="{'has-error' : errors.user_agent}">
-			<label for="user_agent">Агент</label>
-			<input name="user_agent" type="text" class="form-control" ng-model="data.Flat.user_agent">
-			<div class="help-block" data-ng-show="errors.user_agent" data-ng-bind="errors.user_agent"></div>
+		<!--Adress-->
+		<fieldset class="row">
+			<legend>Адрес</legend>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.City.city_id}">
+				<label>Город</label>
+				<select class="form-control" ng-model="data.City.id">
+					<option selected="true" value="">-</option>
+					<option data-ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Flat.street_id}">
+				<label>Улица</label>
+				<select class="form-control" ng-model="data.Flat.street_id">
+					<option selected="true" value="">-</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Flat.num_house}">
+				<label>Дом</label>
+				<input type="text" class="form-control" ng-model="data.Flat.num_house">
+			</div>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Flat.num_flat}">
+				<label>Квартира</label>
+				<input type="text" class="form-control" ng-model="data.Flat.num_house">
+			</div>
+		</fieldset>
+		<!--/Adress-->
+
+		<!--Metro-->
+		<fieldset class="row">
+			<legend>Метро</legend>
+			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Metro.name}">
+				<label>Станция</label>
+				<select class="form-control" ng-model="data.Flat.matro_id">
+					<option selected="true" value="">-</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Flat.far_minutes}">
+				<label>Удаленность [мин.]</label>
+				<select class="form-control" ng-model="data.Flat.far_minutes">
+					<option selected="true" value="">-</option>
+					<option value="">5</option>
+					<option value="">10</option>
+					<option value="">15</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Flat.far_minutes}">
+				<label>Тип удаленности</label>
+				<select class="form-control" ng-model="data.Flat.far_minutes">
+					<option selected="true" value="">-</option>
+					<option value="1">Пешком</option>
+					<option value="2">На транспорте</option>
+				</select>
+			</div>
+		</fieldset>
+		<!--/Metro-->
+
+		<!--Object-->
+		<fieldset class="row">
+			<legend>Объект</legend>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.type}">
+				<label>Объект</label>
+				<select class="form-control" ng-model="data.Flat.type">
+					<option selected="true" value="">-</option>
+					<option value="1">Квартира</option>
+					<option value="2">Дом</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.rooms_total}">
+				<label>Удаленность [мин]</label>
+				<select class="form-control" ng-model="data.Flat.rooms_total">
+					<option selected="true" value="">-</option>
+					<option value="0">Комната</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.rooms_type}">
+				<label>Тип комнат</label>
+				<select class="form-control" ng-model="data.Flat.rooms_type">
+					<option selected="true" value="">-</option>
+					<option value="0">Смежные</option>
+					<option value="1">Раздельные</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.area_total}">
+				<label>Общая площадь [м<sup>2</sup>]</label>
+				<input type="text" class="form-control" ng-model="data.Flat.area_total">
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.area_live}">
+				<label>Жилая площадь [м<sup>2</sup>]</label>
+				<input type="text" class="form-control" ng-model="data.Flat.area_live">
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.area_kitchen}">
+				<label>Площадь кухни [м<sup>2</sup>]</label>
+				<input type="text" class="form-control" ng-model="data.Flat.area_kitchen">
+			</div>
+		</fieldset>
+		<!--/Object-->
+
+
+		<div class="form-group" data-ng-class="{'has-error' : errors.Flat.user_agent}">
+			<label >Агент</label>
+			<input type="text" class="form-control" ng-model="data.Flat.user_agent">
 		</div>
-		<div class="form-group" data-ng-class="{'has-error' : errors.area_total}">
-			<label for="area_total">Полная площадь</label>
-			<input name="area_total" type="text" class="form-control" ng-model="data.Flat.area_total">
-			<div class="help-block" data-ng-show="errors.area_total" data-ng-bind="errors.area_total"></div>
-		</div>
-		<div class="form-group" data-ng-class="{'has-error' : errors.area_live}">
-			<label for="area_live">Жилая площадь</label>
-			<input name="area_live" type="text" class="form-control" ng-model="data.Flat.area_live">
-			<div class="help-block" data-ng-show="errors.area_live" data-ng-bind="errors.area_live"></div>
-		</div>
-		<div class="form-group" data-ng-class="{'has-error' : errors.area_kitchen}">
-			<label for="area_kitchen">Площадь кухни</label>
-			<input name="area_kitchen" type="text" class="form-control" ng-model="data.Flat.area_kitchen">
-			<div class="help-block" data-ng-show="errors.area_kitchen" data-ng-bind="errors.area_kitchen"></div>
-		</div>
+
 		<pre>data:{{data}}</pre>
 		<pre>errors:{{errors}}</pre>
-		<button type="submit" class="btn btn-default">Сохранить</button>
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-lg btn-primary">Сохранить</button>
+		</div>
 	</form>
-
 </div>

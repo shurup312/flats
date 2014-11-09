@@ -15,6 +15,7 @@ class FlatController extends BackendController
 	public function actionIndex()
 	{
 		FlatAsset::register($this->view);
+
 		return $this->render($this->action->id);
 	}
 
@@ -25,6 +26,7 @@ class FlatController extends BackendController
 		}
 		Yii::$app->response->format = Response::FORMAT_JSON;
 		$model = new Flat();
+
 		return [
 			'data' => $model->find()->asArray()->all(),
 			'fields' => $model->labels()
@@ -43,7 +45,7 @@ class FlatController extends BackendController
 		if (!$model->save()) {
 			return [
 				'hasErrors' => true,
-				'errors' => $model->getErrors(),
+				'errors' => [$model->formName() => $model->errors],
 			];
 		}
 
