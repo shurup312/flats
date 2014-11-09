@@ -12,6 +12,17 @@ $this->title = 'Добавление объекта';
 	<h1><?= Html::encode($this->title) ?></h1>
 
 	<form id="company-form" role="form" data-ng-submit="create()" novalidate>
+
+		<!--Agent-->
+		<fieldset class="row">
+			<legend>Агент</legend>
+			<div class="form-group" data-ng-class="{'has-error' : errors.Flat.user_agent}">
+				<label>ФИО</label>
+				<input type="text" class="form-control" data-ng-model="data.Flat.user_agent">
+			</div>
+		</fieldset>
+		<!--/Agent-->
+
 		<!--Adress-->
 		<fieldset class="row">
 			<legend>Адрес</legend>
@@ -53,15 +64,15 @@ $this->title = 'Добавление объекта';
 			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Flat.far_minutes}">
 				<label>Удаленность [мин.]</label>
 				<select class="form-control" data-ng-model="data.Flat.far_minutes">
-					<option selected="true" value="">-</option>
-					<option value="">5</option>
-					<option value="">10</option>
-					<option value="">15</option>
+					<option selected="true" value="0">-</option>
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
 				</select>
 			</div>
-			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Flat.far_minutes}">
+			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Flat.far_type}">
 				<label>Тип удаленности</label>
-				<select class="form-control" data-ng-model="data.Flat.far_minutes">
+				<select class="form-control" data-ng-model="data.Flat.far_type">
 					<option selected="true" value="">-</option>
 					<option value="1">Пешком</option>
 					<option value="2">На транспорте</option>
@@ -82,7 +93,7 @@ $this->title = 'Добавление объекта';
 				</select>
 			</div>
 			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.rooms_total}">
-				<label>Удаленность [мин]</label>
+				<label>Колличество комнат</label>
 				<select class="form-control" data-ng-model="data.Flat.rooms_total">
 					<option selected="true" value="">-</option>
 					<option value="0">Комната</option>
@@ -137,13 +148,36 @@ $this->title = 'Добавление объекта';
 		</fieldset>
 		<!--/Owner-->
 
+		<!--Addons-->
 		<fieldset class="row">
-			<legend>Информация</legend>
-			<div class="form-group" data-ng-class="{'has-error' : errors.Flat.user_agent}">
-				<label >Агент</label>
-				<input type="text" class="form-control" data-ng-model="data.Flat.user_agent">
+			<legend>Дополнительно</legend>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.is_furnitured_rooms}">
+				<input type="checkbox" data-ng-model="data.Flat.is_furnitured_rooms">
+				<label>Мебель в комнатах</label>
 			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.is_furnitures_kitchen}">
+				<input type="checkbox" data-ng-model="data.Flat.is_furnitures_kitchen">
+				<label>Мебель на кухне</label>
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.is_tv}">
+				<input type="checkbox" data-ng-model="data.Flat.is_tv">
+				<label>Телевизор</label>
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.is_refrigerator}">
+				<input type="checkbox" data-ng-model="data.Flat.is_refrigerator">
+				<label>Холодильник</label>
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.is_washer}">
+				<input type="checkbox" data-ng-model="data.Flat.is_washer">
+				<label>Стиральная машина</label>
+			</div>
+			<div class="form-group col-md-2" data-ng-class="{'has-error' : errors.Flat.is_phone}">
+				<input type="checkbox" data-ng-model="data.Flat.is_phone">
+				<label>Стиральная машина</label>
+			</div>
+			<br>
 		</fieldset>
+		<!--/Addons-->
 
 		<pre>data:{{data}}</pre>
 		<pre>errors:{{errors}}</pre>
