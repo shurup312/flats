@@ -22,7 +22,14 @@ services
 	.factory('Street', ['$http', function ($http) {
 		return {
 			getList: function () {
-				return $http.post('/backend/city/list');
+				return $http.post('/backend/street/list');
+			}
+		}
+	}])
+	.factory('Metro', ['$http', function ($http) {
+		return {
+			getList: function () {
+				return $http.post('/backend/metro/list');
 			}
 		}
 	}]);

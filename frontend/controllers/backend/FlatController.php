@@ -4,8 +4,9 @@ namespace frontend\controllers\backend;
 use frontend\models\Flat;
 use frontend\assets\FlatAsset;
 use common\controllers\BackendController;
-use Yii;
+use frontend\models\Owner;
 use yii\web\Response;
+use Yii;
 
 /**
  *  Flat controller
@@ -38,14 +39,35 @@ class FlatController extends BackendController
 		if (!Yii::$app->request->isPost) {
 			return $this->renderPartial($this->action->id);
 		}
+
+		Yii::$app->response->format = Response::FORMAT_JSON;
+
 		$model = new Flat();
 		$model->load(Yii::$app->request->getBodyParams());
 		$model->user_id = Yii::$app->user->id;
-		Yii::$app->response->format = Response::FORMAT_JSON;
+
+		$owner = new Owner();
+		$owner->load(Yii::$app->request->getBodyParams());
+
+		if (!$owner->save()) {
+			$model->validate();
+			return [
+				'hasErrors' => true,
+				'errors' => [
+					$model->formName() => $model->errors,
+					$owner->formName() => $owner->errors
+				]
+			];
+		}
+
+		$model->owner_id = $owner->id;
+
 		if (!$model->save()) {
 			return [
 				'hasErrors' => true,
-				'errors' => [$model->formName() => $model->errors],
+				'errors' => [
+					$model->formName() => $model->errors
+				]
 			];
 		}
 

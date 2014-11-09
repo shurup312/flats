@@ -31,6 +31,7 @@ class Owner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+			[['first_name', 'middle_name', 'last_name'], 'required'],
             [['age'], 'integer'],
             [['first_name', 'middle_name', 'last_name'], 'string', 'max' => 64]
         ];

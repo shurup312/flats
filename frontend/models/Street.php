@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\ActiveRecord;
 use Yii;
 
 /**
@@ -14,7 +15,7 @@ use Yii;
  * @property Flats[] $flats
  * @property Cities $city
  */
-class Street extends \yii\db\ActiveRecord
+class Street extends ActiveRecord
 {
     /**
      * @inheritdoc

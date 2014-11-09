@@ -26,6 +26,7 @@ $this->title = 'Добавление объекта';
 				<label>Улица</label>
 				<select class="form-control" data-ng-model="data.Flat.street_id">
 					<option selected="true" value="">-</option>
+					<option data-ng-repeat="street in streets | filter:streetFilter" value="{{street.id}}">{{street.name}}</option>
 				</select>
 			</div>
 			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Flat.num_house}">
@@ -34,7 +35,7 @@ $this->title = 'Добавление объекта';
 			</div>
 			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Flat.num_flat}">
 				<label>Квартира</label>
-				<input type="text" class="form-control" data-ng-model="data.Flat.num_house">
+				<input type="text" class="form-control" data-ng-model="data.Flat.num_flat">
 			</div>
 		</fieldset>
 		<!--/Adress-->
@@ -44,8 +45,9 @@ $this->title = 'Добавление объекта';
 			<legend>Метро</legend>
 			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Metro.name}">
 				<label>Станция</label>
-				<select class="form-control" data-ng-model="data.Flat.matro_id">
+				<select class="form-control" data-ng-model="data.Flat.metro_id">
 					<option selected="true" value="">-</option>
+					<option data-ng-repeat="metro in metroList" value="{{metro.id}}">{{metro.name}}</option>
 				</select>
 			</div>
 			<div class="form-group col-md-4" data-ng-class="{'has-error' : errors.Flat.far_minutes}">
@@ -113,16 +115,42 @@ $this->title = 'Добавление объекта';
 		</fieldset>
 		<!--/Object-->
 
+		<!--Owner-->
+		<fieldset class="row">
+			<legend>Хозяин</legend>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Owner.first_name}">
+				<label>Имя</label>
+				<input type="text" class="form-control" data-ng-model="data.Owner.first_name">
+			</div>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Owner.last_name}">
+				<label>Фамилия</label>
+				<input type="text" class="form-control" data-ng-model="data.Owner.last_name">
+			</div>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Owner.middle_name}">
+				<label>Отчество</label>
+				<input type="text" class="form-control" data-ng-model="data.Owner.middle_name">
+			</div>
+			<div class="form-group col-md-3" data-ng-class="{'has-error' : errors.Owner.age}">
+				<label>Возраст</label>
+				<input type="text" class="form-control" data-ng-model="data.Owner.age">
+			</div>
+		</fieldset>
+		<!--/Owner-->
 
-		<div class="form-group" data-ng-class="{'has-error' : errors.Flat.user_agent}">
-			<label >Агент</label>
-			<input type="text" class="form-control" data-ng-model="data.Flat.user_agent">
-		</div>
+		<fieldset class="row">
+			<legend>Информация</legend>
+			<div class="form-group" data-ng-class="{'has-error' : errors.Flat.user_agent}">
+				<label >Агент</label>
+				<input type="text" class="form-control" data-ng-model="data.Flat.user_agent">
+			</div>
+		</fieldset>
 
 		<pre>data:{{data}}</pre>
 		<pre>errors:{{errors}}</pre>
+
 		<div class="form-group text-right">
 			<button type="submit" class="btn btn-lg btn-primary">Сохранить</button>
 		</div>
+
 	</form>
 </div>

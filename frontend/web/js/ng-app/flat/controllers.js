@@ -19,27 +19,27 @@ controllers
 				$scope.fields = response.fields;
 			});
 	}])
-	.controller('FlatCreateController', ['$scope', '$state', '$stateParams', 'Flat', 'City', function ($scope, $state, $stateParams, Flat, City) {
+	.controller('FlatCreateController', ['$scope', '$state', '$stateParams', 'Flat', 'City', 'Street', 'Metro', function ($scope, $state, $stateParams, Flat, City, Street, Metro) {
 
 		$scope.$parent.navActive = 'create';
-
-		$scope.data = {
-			Flat: {},
-			City: {}
-		};
-
-		$scope.errors = {
-			Flat: {}
-		};
-
 
 		City.getList()
 			.success(function (response) {
 				$scope.cities = response.data;
 			});
 
+		Street.getList()
+			.success(function (response) {
+				$scope.streets = response.data;
+			});
+
+		Metro.getList()
+			.success(function (response) {
+				$scope.metroList = response.data;
+			});
+
 		$scope.setStreetList = function () {
-			alert();
+			$scope.streetFilter = {city_id: $scope.data.City.id}
 		}
 
 		$scope.create = function () {

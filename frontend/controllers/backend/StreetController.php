@@ -2,14 +2,15 @@
 namespace frontend\controllers\backend;
 
 use common\controllers\BackendController;
-use frontend\models\City;
+
+use frontend\models\Street;
 use yii\web\Response;
 use Yii;
 
 /**
- *  City controller
+ *  Street controller
  */
-class CityController extends BackendController
+class StreetController extends BackendController
 {
 	public function actionList()
 	{
@@ -17,7 +18,7 @@ class CityController extends BackendController
 			return 'Создай вьюху и раскоменть'; //$this->renderPartial($this->action->id);
 		}
 		Yii::$app->response->format = Response::FORMAT_JSON;
-		$model = new City();
+		$model = new Street();
 
 		return [
 			'data' => $model->find()->asArray()->all(),

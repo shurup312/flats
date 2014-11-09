@@ -75,7 +75,7 @@ class Flat extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'owner_id', 'street_id', 'num_house', 'num_flat', 'comment', 'user_agent', 'description'], 'required'],
+            [['user_id', 'street_id', 'num_house', 'num_flat', 'user_agent'], 'required'],
             [['user_id', 'owner_id', 'metro_id', 'street_id', 'num_flat', 'type_id', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
             [['comment', 'description'], 'string'],
             [['date_created', 'date_updated'], 'safe'],
