@@ -24,7 +24,7 @@ class m141107_061144_create_users_table extends Migration
 			'password_hash' => Schema::TYPE_STRING . ' NOT NULL',
 			'password_reset_token' => Schema::TYPE_STRING,
 			'date_created' => Schema::TYPE_TIMESTAMP . ' NOT NULL DEFAULT CURRENT_TIMESTAMP',
-			'date_updated' => Schema::TYPE_TIMESTAMP . ' NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+			'date_updated' => Schema::TYPE_TIMESTAMP . ' NOT NULL',
 		], $tableOptions);
 
 		$this->_createUser();
