@@ -50,7 +50,7 @@ class Image extends \yii\db\ActiveRecord
      */
     public function getFlatsImages()
     {
-        return $this->hasMany(FlatsImages::className(), ['image_id' => 'id']);
+        return $this->hasMany(FlatImage::className(), ['image_id' => 'id']);
     }
 
     /**
@@ -58,6 +58,6 @@ class Image extends \yii\db\ActiveRecord
      */
     public function getFlats()
     {
-        return $this->hasMany(Flats::className(), ['id' => 'flat_id'])->viaTable('flats_images', ['image_id' => 'id']);
+        return $this->hasMany(Flat::className(), ['id' => 'flat_id'])->viaTable('flats_images', ['image_id' => 'id']);
     }
 }

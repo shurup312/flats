@@ -81,7 +81,7 @@ class ListSearchList extends AbstractSearchList {
 	 * @return Street
 	 */
 	public function getStreetModel () {
-		if (!$this->models['street']) {
+		if (!isset($this->models['street'])) {
 			$this->models['street'] = new Street();
 		}
 		return $this->models['street'];
@@ -150,12 +150,12 @@ class ListSearchList extends AbstractSearchList {
 		foreach($this->results['allFlatsInformation'] as $key => $item) {
 			$tmpOwner                                                    = $this->results['tmp']['owners'][$item['owner_id']];
 			$this->results['allFlatsInformation'][$key]['owner_id']      = $tmpOwner['first_name'].' '.$tmpOwner['middle_name'].' '.$tmpOwner['last_name'];
-			$this->results['allFlatsInformation'][$key]['metro_id']      = $this->results['tmp']['metros'][$item['metro_id']]['name'];
+			//$this->results['allFlatsInformation'][$key]['metro_id']      = $this->results['tmp']['metros'][$item['metro_id']]['name'];
 			$this->results['allFlatsInformation'][$key]['street_id']     = $this->results['tmp']['streets'][$item['street_id']]['name'];
 			$this->results['allFlatsInformation'][$key]['type_offer']    = Flat::$typeOffer[$this->results['allFlatsInformation'][$key]['type_offer']];
-			$this->results['allFlatsInformation'][$key]['room_type']     = Flat::$roomType[$this->results['allFlatsInformation'][$key]['room_type']];
+			//$this->results['allFlatsInformation'][$key]['room_type']     = Flat::$roomType[$this->results['allFlatsInformation'][$key]['room_type']];
 			$this->results['allFlatsInformation'][$key]['far_type']      = Flat::$farType[$this->results['allFlatsInformation'][$key]['far_type']];
-			$this->results['allFlatsInformation'][$key]['type_property'] = Flat::$typeProperty[$this->results['allFlatsInformation'][$key]['type_property']];
+			//$this->results['allFlatsInformation'][$key]['type_property'] = Flat::$typeProperty[$this->results['allFlatsInformation'][$key]['type_property']];
 			$this->results['allFlatsInformation'][$key]['currency_id']   = Flat::$currency[$this->results['allFlatsInformation'][$key]['currency_id']];
 			foreach($this->boolFields as $field) {
 				$this->results['allFlatsInformation'][$key][$field] = $item[$field]==0

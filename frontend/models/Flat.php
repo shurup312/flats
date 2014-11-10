@@ -107,7 +107,7 @@ class Flat extends ActiveRecord {
 	public function rules()
     {
         return [
-            [['user_id', 'street_id', 'num_house', 'num_flat'], 'required'],
+            [['street_id', 'num_house', 'num_flat'], 'required'],
             [['user_id', 'owner_id', 'metro_id', 'street_id', 'num_flat', 'type_offer', 'rooms_total', 'rooms_offer', 'rooms_type', 'is_called', 'far_minutes', 'far_type', 'currency_id', 'is_insurance', 'floor_num', 'floor_total', 'is_furnitured_rooms', 'is_furnitures_kitchen', 'is_tv', 'is_refrigerator', 'is_washer', 'is_phone', 'is_balcony', 'is_animal', 'is_child', 'is_on_main', 'is_liquidity'], 'integer'],
             [['comment', 'description'], 'string'],
             [['date_created', 'date_updated'], 'safe'],
@@ -218,5 +218,32 @@ class Flat extends ActiveRecord {
 	 */
 	public function getPhones () {
 		return $this->hasMany(Phone::className(), ['id' => 'phone_id'])->viaTable('flats_phones', ['flat_id' => 'id']);
+	}
+
+	public function beforeSave($insert)
+	{
+		$this->user_id = Yii::$app->user->id;
+		if (parent::beforeSave($insert)) {
+			if ($this->owner === null || !$this->owner->save(false)) {
+				return false;
+			}
+			$this->owner_id = $this->owner->id;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function afterSave($insert, $changedAttributes)
+	{
+		parent::afterSave($insert, $changedAttributes);
+
+		if ($this->images !== null) {
+			foreach ($this->images as $image) {
+				if ($image->save(false)) {
+					$this->link('images', $image);
+				}
+			}
+		}
 	}
 }

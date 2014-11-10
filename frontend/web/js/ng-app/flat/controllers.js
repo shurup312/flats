@@ -35,9 +35,7 @@ controllers
 
 		$scope.$parent.navActive = 'create';
 
-		$scope.fileChanged = function(element) {
-			console.log(element);
-		}
+		$scope.data = {};
 
 		City.getList()
 			.success(function (response) {
@@ -58,12 +56,16 @@ controllers
 			$scope.streetFilter = {city_id: $scope.data.City.id}
 		}
 
+		$scope.loadImages = function(blobs) {
+			$scope.data.Image = blobs;
+		}
+
 		$scope.create = function () {
 			Flat.create($scope.data)
 				.success(function (response) {
 					$scope.errors = {};
 					if (!response.hasErrors) {
-						$state.go('list');
+						//$state.go('list');
 					} else {
 						$scope.errors = response.errors;
 					}

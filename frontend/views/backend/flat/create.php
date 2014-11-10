@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 
@@ -172,15 +171,14 @@ $this->title = 'Добавление объекта';
 		<!--Images-->
 		<fieldset class="row">
 			<legend>Картинки</legend>
-			<div class="form-group">
-				<input multiple="multiple" id="fileSelector" type="file" onchange="angular.element(this).scope().fileChanged(this)" style="display:none">
-				<button onclick="$('#fileSelector').trigger('click')" type="button" class="btn btn-success">+ Добавить картинку</button>
-			</div>
+			<uploader callback="loadImages"></uploader>
 		</fieldset>
 		<!--/Images-->
 
-		<pre>data:{{data}}</pre>
-		<pre>errors:{{errors}}</pre>
+		<!--<pre>data.Flat:{{data.Flat}}</pre>
+		<pre>data.City:{{data.City}}</pre>
+		<pre>data.Owner:{{data.Owner}}</pre>
+		<pre>errors:{{errors}}</pre>-->
 
 		<div class="form-group text-right">
 			<button type="submit" class="btn btn-lg btn-primary">Сохранить</button>
